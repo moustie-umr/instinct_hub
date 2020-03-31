@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <title>{% block title %}Educa{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" >
+</head>
+
+<body>
+  <div class="main_wrapper">
+    <header id="header" class="header">
+      <nav class="wrapper header_nav">
+        <div class="logo_div">
+          <a href="/"> <img class="logo logo1" src="{% static 'svg/instincthub_logo_white.svg' %}" alt="NESG Logo"> </a>
+          <a href="/"> <img class="logo logo2" src="{% static 'svg/instincthub_logo_icon_white.svg' %}" alt="NESG Logo"> </a>
+        </div>
+        <ul class="menu">
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url "logout" %}">Sign out</a></li>
+          {% else %}
+            <li><a href="{% url "login" %}">Sign in</a></li>
+            <li> <a class="registration-button" href="{% url "student_registration" %}">Start Free</a> </li>
+          {% endif %}
+
+        </ul>
+      </nav>
+    </header>
+
+    <div id="content" class="wrapper content-inside">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="">
+      <div class=" wrapper">
+        <a href="https://nesgroup.org" target="_blank"><img class="logo" src="{% static 'svg/instincthub_logo.svg' %}" alt="NESG Logo"></a>
+        <p>© 2020 Instinct Hub, Lagos Nig.</p>
+      </div>
+      <div class="footer_media">
+        <a href="#" target="_blank"> <img src="" alt=""></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      {% block domready %}
+      {% endblock %}
+    });
+  </script>
+
+</body>
+</html>

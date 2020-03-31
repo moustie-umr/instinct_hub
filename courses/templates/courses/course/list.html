@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- List of all available courses and content -->
+
+{% block title %}
+    {% if subject %}
+        {{ subject.title }} courses
+    {% else %}
+        All courses
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="banner_wrap">
+  <div class="banner_content box">
+    <img class="banner_img" src="{% static 'img/library_img.png' %}" alt="Man Studying">
+    <div>
+      <h1>Welcome to Instinct Hub course Library</h1>
+      <p>This is a complete catalog of all the content. Meet industry expert to shape your career.</p>
+    </div>
+  </div>
+</div>
+
+<h2>
+    {% if subject %}
+        {{ subject.title }} courses
+    {% else %}
+        Courses
+    {% endif %}
+</h2>
+<div class="contents">
+    <!-- <h3>Subjects</h3> -->
+    <ul id="modules" class="module_category">
+        <li {% if not subject %}class="selected"{% endif %}>
+            <a href="{% url "course_list" %}">All Courses</a>
+        </li>
+
+        {% for s in subjects %}
+            <li {% if subject == s %}class="selected"{% endif %}>
+                <a href="{% url "course_list_subject" s.slug %}">
+                    {{ s.title }}
+                    <!-- <br><span>{{ s.total_courses }} courses</span> -->
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="module">
+    {% for course in courses %}
+        {% with subject=course.subject %}
+          <div class="module_box">
+            <div class="module_box_content box">
+              <div class="cover_img_bg" style="background-image: url('{{course.cover_img.url}}'); background-repeat: no-repeat; background-position: center;"></div>
+              <div class="module_progress">
+                <img src="{% static 'img/progress.svg' %}" alt="Progress Icon">
+                <span class="module_estimate">{{ course.total_modules }} modules</span>
+
+              </div>
+
+              <strong class="module_type"><a href="{% url "course_list_subject" subject.slug %}">{{ subject }}</a></strong>
+
+              <h3 class="module_title"><a href="{% url "course_detail" course.slug %}">{{ course.title }}</a></h3>
+
+              <p class="instructor">By: {{ course.owner.get_full_name }} </p>
+
+              <p class="module_description">{{ course.overview}}</p>
+
+                {% with subject=course.subject %}
+                  <div class="module_tags">
+                      <!-- <p class="tag price">Free</p> -->
+                    {% if request.user.is_authenticated %}
+                      <a href="{% url "course_list_subject" subject.slug %}" class="truncated-tags tag"> Enrol </a>
+                    {% else %}
+                        <a href="{% url "student_registration" %}" class="button tag">
+                            Enroll for free
+                        </a>
+                    {% endif %}
+                  </div>
+                {% endwith %}
+            </div>
+          </div>
+        {% endwith %}
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

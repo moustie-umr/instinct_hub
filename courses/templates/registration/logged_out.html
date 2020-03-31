@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Logged out{% endblock %}
+
+{% block content %}
+  <div class="logged_out">
+    <h1>Logged out</h1>
+    <div class="module ">
+      <p>You have been successfully logged out. You can <a class="gotham_medium" href="{% url "login" %}">log-in again</a>.</p>
+    </div>
+  </div>
+{% endblock %}

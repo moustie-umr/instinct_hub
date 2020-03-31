@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% load course_extras %}
+
+{% block title %}
+  Module {{ module.order|add:1 }}: {{ module.title }}
+{% endblock %}
+
+{% block content %}
+  {% with course=module.course %}
+  <div class="box content_list">
+    <div class="content_list_module">
+      <h1>Course "{{ course.title }}"</h1>
+      <div class="contents">
+        <h3>Modules</h3>
+        <ul id="modules">
+          {% for m in course.modules.all %}
+          <li data-id="{{ m.id }}" {% if m == module %}
+            class="selected"{% endif %}>
+            <a href="{% url "module_content_list" m.id %}">
+              <span>
+              Module <span class="order">{{ m.order|add:1 }}</span>
+              </span>
+              <br>
+              {{ m.title }}
+            </a>
+          </li>
+          {% empty %}
+          <li>No modules yet.</li>
+          {% endfor %}
+        </ul>
+        <a href="{% url "course_module_update" course.id %}"><button type="button" name="button">
+        Edit modules </button></a>
+      </div>
+    </div>
+
+    <div class="content_list_edit">
+      <h2>Module {{ module.order|add:1 }}: {{ module.title }}</h2>
+      <h3>Module contents:</h3>
+      <div id="module-contents">
+        {% for content in module.contents.all %}
+        <div data-id="{{ content.id }}">
+          {% with item=content.item %}
+          <p>{{ item }} ({{ item|model_name }})</p>
+          <div class="content_types">
+            <a href= "{% url "module_content_update" module.id item|model_name item.id%}"><button type="button" name="button">Edit</button></a>
+            <form action="{% url "module_content_delete" content.id %}"
+            method="post">
+              <input type="submit" value="Delete">
+              {% csrf_token %}
+            </form>
+          </div>
+          {% endwith %}
+        </div>
+        {% empty %}
+        <p>This module has no contents yet.</p>
+        {% endfor %}
+      </div>
+
+      <h3 class="add_type_header">Add new content:</h3>
+      <div class="content_types add_type">
+        <a href="{% url "module_content_create" module.id "text" %}"> <button type="button" name="button"> Text </button></a>
+        <a href="{% url "module_content_create" module.id "image" %}"> <button type="button" name="button"> Image </button></a>
+        <a href="{% url "module_content_create" module.id "video" %}"> <button type="button" name="button"> Video </button></a>
+        <a href="{% url "module_content_create" module.id "file" %}"> <button type="button" name="button"> File </button></a>
+      </div>
+
+    </div>
+  </div>
+
+  {% endwith %}
+{% endblock %}
+
+
+{% block domready %}
+  $('#modules').sortable({
+      stop: function(event, ui) {
+          modules_order = {};
+          $('#modules').children().each(function(){
+              // update the order field
+              $(this).find('.order').text($(this).index() + 1);
+              // associate the module's id with its order
+              modules_order[$(this).data('id')] = $(this).index();
+          });
+          $.ajax({
+              type: 'POST',
+              url: '{% url "module_order" %}',
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'json',
+                 data: JSON.stringify(modules_order)
+             });
+      }
+  });
+
+  $('#module-contents').sortable({
+      stop: function(event, ui) {
+          contents_order = {};
+          $('#module-contents').children().each(function(){
+              // associate the module's id with its order
+              contents_order[$(this).data('id')] = $(this).index();
+          });
+
+          $.ajax({
+              type: 'POST',
+              url: '{% url "content_order" %}',
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'json',
+              data: JSON.stringify(contents_order),
+          });
+      }
+  });
+{% endblock %}

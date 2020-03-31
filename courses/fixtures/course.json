@@ -1,0 +1,104 @@
+[
+  {
+    "model": "courses.course",
+    "pk": 1,
+    "fields": {
+      "owner": 1,
+      "subject": 1,
+      "title": "Graphic Design",
+      "slug": "graphic-design",
+      "overview": "About 38% of consumers won\u2019t use your platforms if they don\u2019t find your layout interactive. Human\r\neyes are one of the greatest assets every brand can tap into. This makes visual first impressions\r\ncritical to engagement and business success. In today\u2019s digital space, graphic, web, and interactive\r\ndesigners must be flexible and appropriate in the evolving world of technology and visual culture.\r\n\r\nThe Graphic Design course from Instinct Hub will provide you with the technical skills and\r\ncreative knowledge needed to make a start in this profession, to equip participants with a strong\r\nfoundation in visual communications. In this programme, participants would learn how to use\r\nAdobe Photoshop, Illustrator and InDesign to create compelling designs for both print and Web\r\nplatforms. Participants would also learn about the business of graphic design and creating a\r\nprofessional portfolio.",
+      "created": "2020-03-18T16:37:25.517Z"
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1,
+    "fields": {
+      "course": 1,
+      "title": "Introduction to Design",
+      "description": "Walk within the process of a design analysis, discover how to translate design goals and exercise giving and receiving project feedback. Learn user-centered design techniques that businesses use to enhance their product experiences."
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 2,
+    "fields": {
+      "course": 1,
+      "title": "The Essence of Graphic Design",
+      "description": "Learn about the scope and history of graphic design. Define graphic design, review some differences between design and art. Discover some of the most influential graphic designers who shaped the industry."
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3,
+    "fields": {
+      "course": 1,
+      "title": "Getting knowledge of Digital Images",
+      "description": "Learn aspects of computer literacy to graphic design, and the basics of graphic design best practices. Understand important file extension.  And understand the elements of digital images."
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 4,
+    "fields": {
+      "course": 1,
+      "title": "Introduction to Adobe Creative Suite",
+      "description": "Learn how to use Adobe software like Photoshop, Illustrator, and InDesign.\r\n\u2022\tUnderstand the strengths and limitations of Adobe Illustrator.\r\n\u2022\tDistinguish the different elements of the Illustrator interface.\r\n\u2022\tExercise possible formats.\r\n\u2022\tExercise drawing simple patterns and adjust the size, circle, and color\r\n\u2022\tIdentify the smooth workflow between photoshop and illustrators"
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 5,
+    "fields": {
+      "course": 1,
+      "title": "Visual Design and Layout Composition",
+      "description": "Learn the elements of visual design. Create your digital media files using Adobe Photoshop. Examine options for choosing typography for a site that offers a smooth experience. Learn how to layout design for the deferent medium."
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 6,
+    "fields": {
+      "course": 1,
+      "title": "Design Ideation and Research",
+      "description": "Discover how to go about producing innovative ideas and delivering them to clients and team members. Use helpful idea creation tools such as brainstorming, targeting and scamping. Also, identify how to avoid plagiarism."
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 7,
+    "fields": {
+      "course": 1,
+      "title": "Principle of Typography and the usage",
+      "description": "Discover how to scale-up layouts with appropriate fonts. Examine commonly used typographic terms. Distinguish the differences between generally used words for \u201cfont\u201d and \u201ctypeface\u201d"
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 8,
+    "fields": {
+      "course": 1,
+      "title": "Designs for Printing Purpose",
+      "description": "Learn critical and simple methods of prints layout. Get familiar with industry offset prints. Articulate steps of getting the document ready for print. Set colors and modes using Adobe Illustrator."
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 9,
+    "fields": {
+      "course": 1,
+      "title": "Designing for the Web",
+      "description": "Learn a web-based design approach. Get a real understanding of the design role and the role of a developer. Use a web development approach to identify technical needs for website development. And increase your design aesthetics decision."
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 10,
+    "fields": {
+      "course": 1,
+      "title": "Build your Career around Design",
+      "description": "Build and curate a collection of your work that will most perfectly reflect what you value as a designer, what it looks like working with you, and finally, what to expect in\u00a0terms of your output. Learn methods for giving effective presentations so you can help model decisions, influence change, and create an impact on the businesses."
+    }
+  }
+]
