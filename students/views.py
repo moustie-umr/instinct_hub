@@ -9,17 +9,29 @@ from .forms import CourseEnrollForm
 from django.views.generic.list import ListView
 from courses.models import Course
 from django.views.generic.detail import DetailView
+from .forms import UserForm, SignUpForm
+from django.core.mail import send_mail
+from instinct_hub.settings import EMAIL_HOST_USER
 
+
+#To Noah: Pull in data from the form (cd) to populate variables
 
 class StudentRegistrationView(CreateView):
     template_name = 'students/student/registration.html'
-    form_class = UserCreationForm
+    form_class = SignUpForm
     success_url = reverse_lazy('student_course_list')
 
     def form_valid(self, form):
+        subject = 'I am a subject'
+        message = 'I am a message'
+        email = ['mustyumr@gmail.com',]
+
         result = super(StudentRegistrationView,
                        self).form_valid(form)
         cd = form.cleaned_data
+
+        send_mail(subject, message, EMAIL_HOST_USER, email, fail_silently=False)
+
         user = authenticate(username=cd['username'],
                            password=cd['password1'])
         

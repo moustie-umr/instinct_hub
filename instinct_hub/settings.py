@@ -24,7 +24,7 @@ LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't7_klue0uu3ov%je@p0n7#8z-1yozx3c##21d*+=u@ya_cw#)n'
+SECRET_KEY = os.environ.get('iHUB_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -140,7 +140,7 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# Cach API
+# Cache API
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -148,9 +148,20 @@ CACHES = {
     }
 }
 
+
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 60 * 15 # 15 minutes
 CACHE_MIDDLEWARE_KEY_PREFIX = 'instinct_hub'
+
+
+#EMAIL SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mustyumr@gmail.com'
+EMAIL_HOST_PASSWORD = '???????' #Change to Email Password
 
 # Rest API
 REST_FRAMEWORK = {
